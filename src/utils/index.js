@@ -1,6 +1,6 @@
 const getAllAddToCart = () => {
     const addCart = JSON.parse(localStorage.getItem("addCart"));
-    return addCart ? addCart : []; 
+    return addCart ? addCart : [];
   };
   
   const addToCart = (item) => {
@@ -10,14 +10,12 @@ const getAllAddToCart = () => {
   
     if (isExist) {
       alert("Item already added to cart");
-      return; 
+      return;
     }
   
-    // Item is being added for the first time
     addCart.push(item);
     localStorage.setItem("addCart", JSON.stringify(addCart));
-    
-    // Show success alert
+  
     alert("Item successfully added to cart!");
   };
   

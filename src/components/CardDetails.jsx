@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
-import { addToCart } from "../utils";
+import { addToCart } from "../utils"; // Import cart functions
+import { addToWishlist } from "../utils/wishlist";
 
 const CardDetails = () => {
   const { product_id } = useParams();
@@ -13,19 +14,13 @@ const CardDetails = () => {
     setItem(singleData);
   }, [allItems, product_id]);
 
-  const {
-    product_title,
-    product_image,
-    price,
-    description,
-    Specification,
-    rating,
-  } = item;
+  const handleAddToCart = (item) => {
+    addToCart(item);
+  };
 
-const handleAddToCart = (item) =>{
-    addToCart(item)
-}
-
+  const handleAddToWishlist = (item) => {
+    addToWishlist(item);
+  };
 
   return (
     <div>
@@ -35,40 +30,41 @@ const handleAddToCart = (item) =>{
       </div>
       <div className="card card-side bg-base-100 shadow-xl w-11/12 max-w-3xl mx-auto -mt-36 mb-6">
         <figure className="w-1/3">
-          {product_image && (
+          {item.product_image && (
             <img
-              src={product_image}
-              alt={product_title}
+              src={item.product_image}
+              alt={item.product_title}
               className="object-contain w-full h-full"
             />
           )}
         </figure>
         <div className="card-body w-2/3">
-          <h2 className="card-title">{product_title }</h2>
+          <h2 className="card-title">{item.product_title}</h2>
           <p>
-            <strong>Price:</strong> ${price}
+            <strong>Price:</strong> ${item.price}
           </p>
           <p>
-            <strong>Description:</strong> {description}
+            <strong>Description:</strong> {item.description}
           </p>
           <p>
             <strong>Specification:</strong>{" "}
-            {Specification ? Specification.join(", ") : "N/A"}
+            {item.Specification ? item.Specification.join(", ") : "N/A"}
           </p>
           <p>
-            <strong>Rating:</strong> {rating} ⭐
+            <strong>Rating:</strong> {item.rating} ⭐
           </p>
           <div className="card-actions justify-end">
-            <button onClick={()=>handleAddToCart(item)} className="btn btn-primary">Add to Cart</button>
-            <button className="btn btn-secondary ml-2">❤️ Wishlist</button>
+            <button onClick={() => handleAddToCart(item)} className="btn btn-primary">
+              Add to Cart
+            </button>
+            <button onClick={() => handleAddToWishlist(item)} className="btn btn-secondary ml-2">
+              ❤️ Wishlist
+            </button>
           </div>
         </div>
       </div>
       <div className="flex justify-center mb-12">
-        <button
-          className="btn btn-outline"
-          onClick={() => navigate("/")}
-        >
+        <button className="btn btn-outline" onClick={() => navigate("/")}>
           Back to Home
         </button>
       </div>

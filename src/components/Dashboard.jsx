@@ -1,44 +1,53 @@
 import { useEffect, useState } from "react";
-import { getAllAddToCart, removeFromCart } from "../utils";
+import { getAllAddToCart, removeFromCart } from "../utils"; // Ensure these functions are correctly implemented
 import AddToCart from "./AddToCart";
+import AddToWishlist from "./AddToWishlist";
+import { getAllWishlistItems } from "../utils/wishlist"; // Make sure this function retrieves wishlist items correctly
 
 const Dashboard = () => {
   const [items, setItems] = useState([]);
-  const [wishlist, setWishlist] = useState([]); 
+  const [wishlist, setWishlist] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [showCart, setShowCart] = useState(true); 
+  const [showCart, setShowCart] = useState(true);
   const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
-    const allItems = getAllAddToCart();
+    const allItems = getAllAddToCart() || []; // Ensure array fallback
     setItems(allItems);
+    calculateTotalPrice(allItems);
+
+    // Load wishlist items
+    const allWishlistItems = getAllWishlistItems() || [];
+    setWishlist(allWishlistItems);
   }, []);
 
-  useEffect(() => {
-    const total = items.reduce((acc, item) => acc + item.price, 0);
+  const calculateTotalPrice = (cartItems) => {
+    const total = cartItems.reduce((acc, item) => acc + item.price, 0);
     setTotalPrice(total);
-  }, [items]);
+  };
 
   const handleRemoveFromCart = (product_id) => {
     removeFromCart(product_id);
-    setItems((prevItems) =>
-      prevItems.filter((item) => item.product_id !== product_id)
-    );
+    const updatedItems = items.filter((item) => item.product_id !== product_id);
+    setItems(updatedItems);
+    calculateTotalPrice(updatedItems);
   };
 
   const handleAddToWishlist = (item) => {
-    if (!wishlist.some(wishItem => wishItem.product_id === item.product_id)) {
-      setWishlist((prevWishlist) => [...prevWishlist, item]);
+    if (!wishlist.some((wishItem) => wishItem.product_id === item.product_id)) {
+      const updatedWishlist = [...wishlist, item];
+      setWishlist(updatedWishlist);
+      localStorage.setItem("wishlist", JSON.stringify(updatedWishlist)); // Update localStorage
     } else {
       alert("Item is already in the wishlist!");
     }
   };
 
   const handleRemoveFromWishlist = (product_id) => {
-    setWishlist((prevWishlist) =>
-      prevWishlist.filter((item) => item.product_id !== product_id)
-    );
+    const updatedWishlist = wishlist.filter((item) => item.product_id !== product_id);
+    setWishlist(updatedWishlist);
+    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist)); // Update localStorage
   };
 
   const handlePurchase = () => {
@@ -66,14 +75,14 @@ const Dashboard = () => {
         <h1 className="text-3xl">Dashboard</h1>
         <p>Here you can find all the information about the selected product.</p>
         <div className="flex justify-center space-x-4 mt-4">
-          <button 
-            className={`btn ${showCart ? 'btn-primary' : 'btn-secondary'}`} 
+          <button
+            className={`btn ${showCart ? 'btn-primary' : 'btn-secondary'}`}
             onClick={() => setShowCart(true)}
           >
             Cart
           </button>
-          <button 
-            className={`btn ${showCart ? 'btn-secondary' : 'btn-primary'}`} 
+          <button
+            className={`btn ${showCart ? 'btn-secondary' : 'btn-primary'}`}
             onClick={() => setShowCart(false)}
           >
             Wishlist
@@ -104,7 +113,7 @@ const Dashboard = () => {
                 key={item.product_id}
                 item={item}
                 handleRemove={handleRemoveFromCart}
-                handleWishlist={handleAddToWishlist} 
+                handleWishlist={handleAddToWishlist}
               />
             ))
           ) : (
@@ -113,10 +122,10 @@ const Dashboard = () => {
         ) : (
           wishlist.length > 0 ? (
             wishlist.map((item) => (
-              <AddToCart
+              <AddToWishlist
                 key={item.product_id}
                 item={item}
-                handleRemove={handleRemoveFromWishlist} 
+                handleRemove={handleRemoveFromWishlist}
               />
             ))
           ) : (
@@ -126,9 +135,14 @@ const Dashboard = () => {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+        <div
+          className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
+          aria-labelledby="modal-title"
+          role="dialog"
+          aria-modal="true"
+        >
           <div className="bg-white p-5 rounded-md shadow-md">
-            <h2 className="text-lg font-semibold">Purchase Successful!</h2>
+            <h2 id="modal-title" className="text-lg font-semibold">Purchase Successful!</h2>
             <p>Thank you for your purchase!</p>
             <button className="btn btn-primary mt-4" onClick={closeModal}>
               Close
