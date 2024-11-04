@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import bannerImage from "../assets/banner.jpg";
 const Banner = () => {
     return (
@@ -11,7 +12,9 @@ const Banner = () => {
           Discover the latest and greatest in tech accessories. From chargers to
           cases, we have everything you need to enhance your tech experience.
         </p>
-        <button className="btn btn-primary mb-4">Shop Now</button>
+
+        <Link to='/dashboard'>        <button className="btn btn-primary mb-4">Shop Now</button>
+        </Link>
       </div>
 
       <div className="flex justify-center mb-4 -mt-32 ">

@@ -4,18 +4,60 @@ import AddToCart from "./AddToCart";
 
 const Dashboard = () => {
   const [items, setItems] = useState([]);
+  const [wishlist, setWishlist] = useState([]); 
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [showCart, setShowCart] = useState(true); 
+  const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
-    // Fetch all items from the cart and set the state
     const allItems = getAllAddToCart();
     setItems(allItems);
-  }, []); // Empty dependency array ensures this runs only on mount
+  }, []);
 
-  const handleRemove = (product_id) => {
-    // Call to remove the product
+  useEffect(() => {
+    const total = items.reduce((acc, item) => acc + item.price, 0);
+    setTotalPrice(total);
+  }, [items]);
+
+  const handleRemoveFromCart = (product_id) => {
     removeFromCart(product_id);
-    // Update the state by filtering out the removed item
-    setItems((prevItems) => prevItems.filter(item => item.product_id !== product_id));
+    setItems((prevItems) =>
+      prevItems.filter((item) => item.product_id !== product_id)
+    );
+  };
+
+  const handleAddToWishlist = (item) => {
+    if (!wishlist.some(wishItem => wishItem.product_id === item.product_id)) {
+      setWishlist((prevWishlist) => [...prevWishlist, item]);
+    } else {
+      alert("Item is already in the wishlist!");
+    }
+  };
+
+  const handleRemoveFromWishlist = (product_id) => {
+    setWishlist((prevWishlist) =>
+      prevWishlist.filter((item) => item.product_id !== product_id)
+    );
+  };
+
+  const handlePurchase = () => {
+    items.forEach((item) => removeFromCart(item.product_id));
+    setItems([]);
+    setTotalPrice(0);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const handleSort = () => {
+    const sortedItems = [...items].sort((a, b) => {
+      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+    });
+    setItems(sortedItems);
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
   return (
@@ -24,24 +66,76 @@ const Dashboard = () => {
         <h1 className="text-3xl">Dashboard</h1>
         <p>Here you can find all the information about the selected product.</p>
         <div className="flex justify-center space-x-4 mt-4">
-          <button className="btn btn-primary">Cart</button>
-          <button className="btn btn-secondary">Wishlist</button>
+          <button 
+            className={`btn ${showCart ? 'btn-primary' : 'btn-secondary'}`} 
+            onClick={() => setShowCart(true)}
+          >
+            Cart
+          </button>
+          <button 
+            className={`btn ${showCart ? 'btn-secondary' : 'btn-primary'}`} 
+            onClick={() => setShowCart(false)}
+          >
+            Wishlist
+          </button>
         </div>
       </header>
 
-      <div className="mt-6">
-        {items.length > 0 ? (
-          items.map((item) => (
-            <AddToCart
-              key={item.product_id}
-              item={item}
-              handleRemove={handleRemove}
-            />
-          ))
-        ) : (
-          <p className="text-center text-gray-600">Your cart is empty.</p>
+      <div className="container mx-auto flex justify-between mt-4">
+        <h1>{showCart ? "Cart" : "Wishlist"}</h1>
+        {showCart && (
+          <div className="flex justify-center items-center gap-8">
+            <h1>Total Cost: ${totalPrice}</h1>
+            <button className="btn btn-warning" onClick={handleSort}>
+              Sort By Price {sortOrder === "asc" ? "🔼" : "🔽"}
+            </button>
+            <button className="btn btn-success" onClick={handlePurchase}>
+              Purchase
+            </button>
+          </div>
         )}
       </div>
+
+      <div className="mt-6">
+        {showCart ? (
+          items.length > 0 ? (
+            items.map((item) => (
+              <AddToCart
+                key={item.product_id}
+                item={item}
+                handleRemove={handleRemoveFromCart}
+                handleWishlist={handleAddToWishlist} 
+              />
+            ))
+          ) : (
+            <p className="text-center text-gray-600">Your cart is empty.</p>
+          )
+        ) : (
+          wishlist.length > 0 ? (
+            wishlist.map((item) => (
+              <AddToCart
+                key={item.product_id}
+                item={item}
+                handleRemove={handleRemoveFromWishlist} 
+              />
+            ))
+          ) : (
+            <p className="text-center text-gray-600">Your wishlist is empty.</p>
+          )
+        )}
+      </div>
+
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-5 rounded-md shadow-md">
+            <h2 className="text-lg font-semibold">Purchase Successful!</h2>
+            <p>Thank you for your purchase!</p>
+            <button className="btn btn-primary mt-4" onClick={closeModal}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

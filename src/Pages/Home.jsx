@@ -4,24 +4,21 @@ import Items from "../components/Items";
 import Banner from "../components/Banner";
 
 const Home = () => {
-  const items = useLoaderData(); 
+  const items = useLoaderData();
 
   return (
-   <div>
-    <Banner></Banner>
-     <div className="container mx-auto">
-      <div>
-       
-        <Heading title={"Explore Cutting Edge Gadgets"} />
+    <div>
+      <Banner></Banner>
+      <div className="container mx-auto">
+        <div>
+          <Heading title={"Explore Cutting Edge Gadgets"} />
+        </div>
+        <div>
+          <Items items={items} />
+        </div>
+        <Outlet />
       </div>
-      <div><Items items={items} /> 
-      
- 
-      
-      </div>
-      <Outlet />
     </div>
-   </div>
   );
 };
 

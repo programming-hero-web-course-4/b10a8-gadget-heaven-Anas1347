@@ -44,7 +44,7 @@ const handleAddToCart = (item) =>{
           )}
         </figure>
         <div className="card-body w-2/3">
-          <h2 className="card-title">{product_title || "Loading..."}</h2>
+          <h2 className="card-title">{product_title }</h2>
           <p>
             <strong>Price:</strong> ${price}
           </p>

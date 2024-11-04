@@ -1,16 +1,24 @@
 const getAllAddToCart = () => {
     const addCart = JSON.parse(localStorage.getItem("addCart"));
-    return addCart ? addCart : [];
+    return addCart ? addCart : []; 
   };
   
   const addToCart = (item) => {
     const addCart = getAllAddToCart();
+    
     const isExist = addCart.find((cartItem) => cartItem.product_id === item.product_id);
-    
-    if (isExist) return alert("Already added to cart");
-    
+  
+    if (isExist) {
+      alert("Item already added to cart");
+      return; 
+    }
+  
+    // Item is being added for the first time
     addCart.push(item);
     localStorage.setItem("addCart", JSON.stringify(addCart));
+    
+    // Show success alert
+    alert("Item successfully added to cart!");
   };
   
   const removeFromCart = (product_id) => {
@@ -21,5 +29,9 @@ const getAllAddToCart = () => {
     localStorage.setItem("addCart", JSON.stringify(addCart));
   };
   
-  export { addToCart, getAllAddToCart, removeFromCart };
+  const clearCart = () => {
+    localStorage.removeItem("addCart");
+  };
+  
+  export { addToCart, getAllAddToCart, removeFromCart, clearCart };
   
