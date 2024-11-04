@@ -1,28 +1,34 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Items = ({ items }) => {
   return (
-    <div className="flex">
+    <div className=" ">
       <div
         role="tablist"
-        className="tabs tabs-boxed flex flex-col gap-8 bg-gray-400 font-bold"
+        className="tabs tabs-boxed  gap-8 bg-gray-200 font-bold"
       >
-        <Link
-           to="/"
-          className="tab rounded-lg bg-gray-200 hover:bg-gray-300 transition w-full text-left capitalize"
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `tab rounded-lg transition w-full  capitalize ${
+              isActive ? "tab-active " : ""
+            }`
+          }
         >
           All Products
-        </Link>
+        </NavLink>
 
         {items.map((item) => (
-          <Link
+          <NavLink
             key={item.product_id}
             role="tab"
-            className="tab rounded-lg bg-gray-200 hover:bg-gray-300 transition w-full text-left capitalize"
             to={`/category/${item.category}`}
+            className={({ isActive }) =>
+              `tab capitalize ${isActive ? "tab-active " : " "}`
+            }
           >
             {item.category}
-          </Link>
+          </NavLink>
         ))}
       </div>
     </div>
