@@ -9,13 +9,13 @@ const Dashboard = () => {
     // Fetch all items from the cart and set the state
     const allItems = getAllAddToCart();
     setItems(allItems);
-  }, []);
+  }, []); // Empty dependency array ensures this runs only on mount
 
   const handleRemove = (product_id) => {
+    // Call to remove the product
     removeFromCart(product_id);
-    // Update the state after removing an item
-    const updatedItems = getAllAddToCart();
-    setItems(updatedItems);
+    // Update the state by filtering out the removed item
+    setItems((prevItems) => prevItems.filter(item => item.product_id !== product_id));
   };
 
   return (

@@ -1,42 +1,34 @@
-import { useEffect, useState } from "react";
-import { getAllAddToCart, removeFromCart } from "../utils";
-import AddToCart from "./AddToCart";
+import React from "react";
 
-const Dashboard = () => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    const allItems = getAllAddToCart();
-    setItems(allItems);
-  }, []);
-
-  const handleRemove = (product_id) => {
-    removeFromCart(product_id);
-    setItems(getAllAddToCart()); // Refresh the items after removing
-  };
+const AddToCart = ({ item, handleRemove }) => {
+  const { product_title, product_image, price, description, product_id } = item;
 
   return (
-    <div>
-      <div className="bg-purple-600 text-white text-center flex flex-col py-4">
-        <h1 className="text-3xl">Dashboard</h1>
-        <p>Here you can find all the information about the selected product.</p>
-        <div className="flex justify-center space-x-4 mt-4">
-          <button className="btn btn-primary">Cart</button>
-          <button className="btn btn-secondary">Wishlist</button>
-        </div>
-      </div>
+    <div className="container mx-auto">
+      <div className="flex items-center mb-6 mt-2 bg-base-100 w-full shadow-lg rounded-lg p-4 space-x-4">
+        <figure className="w-1/4">
+          <img
+            src={product_image || '/path/to/fallback/image.jpg'} 
+            alt={product_title}
+            className="h-32 w-full object-contain rounded-md"
+          />
+        </figure>
 
-      <div>
-        {items.length > 0 ? (
-          items.map((item) => (
-            <AddToCart handleRemove={handleRemove} key={item.product_id} item={item} />
-          ))
-        ) : (
-          <p className="text-center">Your cart is empty.</p>
-        )}
+        <div className="flex-1">
+          <h2 className="text-lg font-semibold">{product_title}</h2>
+          <p className="text-sm text-gray-600 mb-2">{description}</p>
+          <p className="text-md font-semibold">Price: ${price}</p>
+        </div>
+
+        <button 
+          onClick={() => handleRemove(product_id)} 
+          className="btn btn-error text-white"
+        >
+          Delete
+        </button>
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default AddToCart;

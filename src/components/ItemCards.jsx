@@ -13,7 +13,7 @@ const ItemCards = () => {
       const filtered = allData.filter((item) => item.category === category);
       setFilteredData(filtered);
     } else {
-      setFilteredData(allData); // Show all products if no category is specified
+      setFilteredData(allData.slice(0,9));
     }
   }, [allData, category]);
 
