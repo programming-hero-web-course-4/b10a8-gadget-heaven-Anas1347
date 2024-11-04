@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
-import { addToCart } from "../utils"; // Import cart functions
+import { addToCart } from "../utils"; 
 import { addToWishlist } from "../utils/wishlist";
 
 const CardDetails = () => {

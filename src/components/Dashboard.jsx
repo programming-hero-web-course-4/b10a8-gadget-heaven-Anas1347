@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getAllAddToCart, removeFromCart } from "../utils"; // Ensure these functions are correctly implemented
+import { getAllAddToCart, removeFromCart } from "../utils"; 
 import AddToCart from "./AddToCart";
 import AddToWishlist from "./AddToWishlist";
-import { getAllWishlistItems } from "../utils/wishlist"; // Make sure this function retrieves wishlist items correctly
+import { getAllWishlistItems } from "../utils/wishlist"; 
 
 const Dashboard = () => {
   const [items, setItems] = useState([]);
@@ -13,11 +13,11 @@ const Dashboard = () => {
   const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
-    const allItems = getAllAddToCart() || []; // Ensure array fallback
+    const allItems = getAllAddToCart() || []; 
     setItems(allItems);
     calculateTotalPrice(allItems);
 
-    // Load wishlist items
+  
     const allWishlistItems = getAllWishlistItems() || [];
     setWishlist(allWishlistItems);
   }, []);
@@ -38,7 +38,7 @@ const Dashboard = () => {
     if (!wishlist.some((wishItem) => wishItem.product_id === item.product_id)) {
       const updatedWishlist = [...wishlist, item];
       setWishlist(updatedWishlist);
-      localStorage.setItem("wishlist", JSON.stringify(updatedWishlist)); // Update localStorage
+      localStorage.setItem("wishlist", JSON.stringify(updatedWishlist)); 
     } else {
       alert("Item is already in the wishlist!");
     }
@@ -47,7 +47,7 @@ const Dashboard = () => {
   const handleRemoveFromWishlist = (product_id) => {
     const updatedWishlist = wishlist.filter((item) => item.product_id !== product_id);
     setWishlist(updatedWishlist);
-    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist)); // Update localStorage
+    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist)); 
   };
 
   const handlePurchase = () => {
