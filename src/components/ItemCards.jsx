@@ -16,7 +16,7 @@ const ItemCards = () => {
       );
       setFilteredData(filtered);
     } else {
-      setFilteredData(allData.slice(0, 12));
+      setFilteredData(allData.slice(0, 9));
     }
   }, [allData, category]);
 

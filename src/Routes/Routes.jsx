@@ -6,7 +6,7 @@ import Statistics from "../components/Statistics";
 import Layout from "../Pages/Layout";
 import ItemCards from "../components/ItemCards";
 import AllProducts from "../components/AllProducts";
-
+import CardDetails from "../components/CardDetails"; 
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             loader: () => fetch("../allData.json"),
           },
           {
-            path: "category/:category",
+            path: "categories/:category",
             element: <ItemCards></ItemCards>,
             loader: () => fetch("../allData.json"),
           },
@@ -42,6 +42,11 @@ const router = createBrowserRouter([
       {
         path: "all-products",
         element: <AllProducts />,
+        loader: () => fetch("../allData.json"),
+      },
+      {
+        path: "/category/:product_id",
+        element: <CardDetails/>,
         loader: () => fetch("../allData.json"),
       },
     ],

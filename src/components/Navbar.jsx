@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -6,8 +6,8 @@ const Navbar = () => {
 
   return (
     <div>
-      {/* Navbar Section */}
-      <div className="navbar bg-purple-400">
+      
+      <div className="navbar backdrop-blur-xl bg-white/30 px-12 z-50 fixed">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -28,92 +28,92 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow "
             >
               <li>
-                <Link
+                <NavLink
                   to="/"
                   className={location.pathname === "/" ? "font-bold" : ""}
                 >
                   Home
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/dashboard"
                   className={
                     location.pathname === "/dashboard" ? "font-bold" : ""
                   }
                 >
                   Dashboard
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/statistics"
                   className={
                     location.pathname === "/statistics" ? "font-bold" : ""
                   }
                 >
                   Statistics
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/all-products"
                   className={
                     location.pathname === "/all-products" ? "font-bold" : ""
                   }
                 >
                   All Products
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost text-xl">
-            Gadget Heaven
-          </Link>
+          <NavLink to="/" className="font-bold text-xl">
+            Gadget <span className="text-4xl text-blue-600">&</span> Heaven
+          </NavLink>
         </div>
 
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 gap-4">
             <li>
-              <Link
+              <NavLink
                 to="/"
-                className={location.pathname === "/" ? "font-bold" : ""}
+                className= {location.pathname === "/" ? "font-bold " : ""}
               >
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/dashboard"
                 className={
                   location.pathname === "/dashboard" ? "font-bold" : ""
                 }
               >
                 Dashboard
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/statistics"
                 className={
                   location.pathname === "/statistics" ? "font-bold" : ""
                 }
               >
                 Statistics
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/all-products"
                 className={
                   location.pathname === "/all-products" ? "font-bold" : ""
                 }
               >
                 All Products
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

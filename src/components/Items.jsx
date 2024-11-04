@@ -22,7 +22,7 @@ const Items = ({ items }) => {
           <NavLink
             key={item.product_id}
             role="tab"
-            to={`/category/${item.category}`}
+            to={`/categories/${item.category}`}
             className={({ isActive }) =>
               `tab capitalize ${isActive ? "tab-active " : " "}`
             }
