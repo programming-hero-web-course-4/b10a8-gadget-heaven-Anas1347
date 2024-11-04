@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useParams, useNavigate } from "react-router-dom";
+import { addToCart } from "../utils";
 
 const CardDetails = () => {
   const { product_id } = useParams();
   const allItems = useLoaderData();
+  const navigate = useNavigate();
   const [item, setItem] = useState({});
 
   useEffect(() => {
@@ -20,19 +22,24 @@ const CardDetails = () => {
     rating,
   } = item;
 
+const handleAddToCart = (item) =>{
+    addToCart(item)
+}
+
+
   return (
-    <div >
+    <div>
       <div className="bg-purple-600 text-white text-center h-72 flex flex-col py-4">
         <h1 className="text-3xl">Product Details</h1>
         <p>Here you can find all the information about the selected product.</p>
       </div>
-      <div className="card card-side bg-base-100 shadow-xl w-11/12 max-w-3xl mx-auto -mt-36 mb-20">
+      <div className="card card-side bg-base-100 shadow-xl w-11/12 max-w-3xl mx-auto -mt-36 mb-6">
         <figure className="w-1/3">
           {product_image && (
             <img
               src={product_image}
               alt={product_title}
-              className="object-contain w-full h-full "
+              className="object-contain w-full h-full"
             />
           )}
         </figure>
@@ -52,10 +59,18 @@ const CardDetails = () => {
             <strong>Rating:</strong> {rating} ⭐
           </p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Add to Cart</button>
+            <button onClick={()=>handleAddToCart(item)} className="btn btn-primary">Add to Cart</button>
             <button className="btn btn-secondary ml-2">❤️ Wishlist</button>
           </div>
         </div>
+      </div>
+      <div className="flex justify-center mb-12">
+        <button
+          className="btn btn-outline"
+          onClick={() => navigate("/")}
+        >
+          Back to Home
+        </button>
       </div>
     </div>
   );
