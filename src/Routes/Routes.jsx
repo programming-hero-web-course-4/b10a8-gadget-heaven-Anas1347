@@ -6,7 +6,7 @@ import Statistics from "../components/Statistics";
 import Layout from "../Pages/Layout";
 import ItemCards from "../components/ItemCards";
 import AllProducts from "../components/AllProducts";
-import CardDetails from "../components/CardDetails"; 
+import CardDetails from "../components/CardDetails";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/category/:product_id",
-        element: <CardDetails/>,
+        element: <CardDetails />,
         loader: () => fetch("../allData.json"),
       },
     ],

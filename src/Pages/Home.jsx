@@ -1,4 +1,5 @@
 import { Outlet, useLoaderData } from "react-router-dom";
+import { useEffect } from "react"; 
 import Heading from "../components/Heading";
 import Items from "../components/Items";
 import Banner from "../components/Banner";
@@ -6,12 +7,16 @@ import Banner from "../components/Banner";
 const Home = () => {
   const items = useLoaderData();
 
+  useEffect(() => {
+    document.title = "Gadget & Heaven | Home"; 
+  }, []); 
+
   return (
     <div>
-      <Banner></Banner>
+      <Banner />
       <div className="container mx-auto">
         <div>
-          <Heading title={"Explore Cutting Edge Gadgets"} />
+          <Heading title="Explore Cutting Edge Gadgets" />
         </div>
         <div>
           <Items items={items} />

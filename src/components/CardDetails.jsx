@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
-import { addToCart } from "../utils"; 
+import { addToCart } from "../utils";
 import { addToWishlist } from "../utils/wishlist";
 
 const CardDetails = () => {
@@ -54,10 +54,16 @@ const CardDetails = () => {
             <strong>Rating:</strong> {item.rating} ⭐
           </p>
           <div className="card-actions justify-end">
-            <button onClick={() => handleAddToCart(item)} className="btn btn-primary">
+            <button
+              onClick={() => handleAddToCart(item)}
+              className="btn btn-primary"
+            >
               Add to Cart
             </button>
-            <button onClick={() => handleAddToWishlist(item)} className="btn btn-secondary ml-2">
+            <button
+              onClick={() => handleAddToWishlist(item)}
+              className="btn btn-secondary ml-2"
+            >
               ❤️ Wishlist
             </button>
           </div>

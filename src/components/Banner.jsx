@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import bannerImage from "../assets/banner.jpg";
 const Banner = () => {
-    return (
-        <div>
-             <div className="flex flex-col items-center text-white bg-purple-400 p-4 h-[400px]">
+  return (
+    <div>
+      <div className="flex flex-col items-center text-white bg-purple-400 p-4 h-[400px]">
         <h1 className="text-4xl font-bold mb-2">
           Upgrade Your Tech Accessories
         </h1>
@@ -13,7 +13,8 @@ const Banner = () => {
           cases, we have everything you need to enhance your tech experience.
         </p>
 
-        <Link to='/dashboard'>        <button className="btn btn-primary mb-4">Shop Now</button>
+        <Link to="/dashboard">
+          <button className="btn btn-primary mb-4">Shop Now</button>
         </Link>
       </div>
 
@@ -26,8 +27,8 @@ const Banner = () => {
           />
         </div>
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Banner;

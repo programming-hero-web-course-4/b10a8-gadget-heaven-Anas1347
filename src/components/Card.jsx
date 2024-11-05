@@ -16,11 +16,11 @@ const Card = ({ item }) => {
         <h2 className="card-title text-lg font-semibold">{product_title}</h2>
         <p className="text-md font-semibold mb-4">${price}</p>
         <div className="card-actions justify-start">
-        <Link to={`/category/${product_id}`}>
-        <button className="btn btn-primary hover:bg-blue-700">
-            View Details
-          </button>
-        </Link>
+          <Link to={`/category/${product_id}`}>
+            <button className="btn btn-primary hover:bg-blue-700">
+              View Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>

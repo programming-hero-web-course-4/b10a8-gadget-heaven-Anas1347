@@ -8,7 +8,9 @@ const getAllAddToCart = () => {
 const addToCart = (item) => {
   const addCart = getAllAddToCart();
 
-  const isExist = addCart.find((cartItem) => cartItem.product_id === item.product_id);
+  const isExist = addCart.find(
+    (cartItem) => cartItem.product_id === item.product_id
+  );
 
   if (isExist) {
     toast.error("Item already added to cart");
@@ -18,25 +20,24 @@ const addToCart = (item) => {
   addCart.push(item);
   localStorage.setItem("addCart", JSON.stringify(addCart));
 
-  // Use toast instead of alert
   toast.success("Item successfully added to cart!");
 };
 
 const removeFromCart = (product_id) => {
   let addCart = getAllAddToCart();
 
-  addCart = addCart.filter((cartItem) => cartItem.product_id !== product_id);
-
-  localStorage.setItem("addCart", JSON.stringify(addCart));
-
-  // Optional: Notify when an item is removed
-  toast.info("Item removed from cart");
+  const itemExists = addCart.find(
+    (cartItem) => cartItem.product_id === product_id
+  );
+  if (itemExists) {
+    addCart = addCart.filter((cartItem) => cartItem.product_id !== product_id);
+    localStorage.setItem("addCart", JSON.stringify(addCart));
+  }
 };
 
 const clearCart = () => {
   localStorage.removeItem("addCart");
-  
-  // Notify when cart is cleared
+
   toast.info("Cart has been cleared");
 };
 
