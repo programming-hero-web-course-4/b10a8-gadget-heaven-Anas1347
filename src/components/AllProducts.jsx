@@ -22,7 +22,7 @@ const AllProducts = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center my-12">
+      <div className="flex justify-between container mx-auto items-center my-12">
         <div className="text-2xl">Sort Items</div>
         <div>
           <button onClick={() => handleSort("price")} className="btn">
