@@ -19,14 +19,14 @@ const ItemCards = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 mb-4">
         {filteredData.length > 0 ? (
           filteredData.map((item) => <Card key={item.product_id} item={item} />)
         ) : (
           <p className="text-center">No products found in this category.</p>
         )}
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 mb-4">
         <button
           onClick={() => navigate("/all-products")}
           className="btn btn-success"

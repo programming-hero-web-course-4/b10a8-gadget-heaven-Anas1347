@@ -5,8 +5,8 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <div>
-      <div className="navbar backdrop-blur-xl bg-white/30 px-12 z-50 fixed">
+    <div >
+      <div className=" navbar backdrop-blur-xl bg-white/30 px-10 z-50 fixed">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

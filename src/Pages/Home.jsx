@@ -12,16 +12,20 @@ const Home = () => {
   }, []); 
 
   return (
-    <div>
+    <div className="mt-2">
       <Banner />
       <div className="container mx-auto">
         <div>
           <Heading title="Explore Cutting Edge Gadgets" />
         </div>
         <div>
+        <div>
           <Items items={items} />
         </div>
+        <div>
         <Outlet />
+        </div>
+        </div>
       </div>
     </div>
   );

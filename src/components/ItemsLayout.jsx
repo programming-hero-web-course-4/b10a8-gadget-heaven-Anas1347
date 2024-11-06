@@ -5,7 +5,7 @@ import { useLoaderData } from "react-router-dom";
 const ItemsLayout = () => {
   const category = useLoaderData();
   return (
-    <div className="flex">
+    <div className="">
       <div>
         <Items category={category} />
       </div>
