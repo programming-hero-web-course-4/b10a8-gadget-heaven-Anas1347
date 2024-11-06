@@ -4,6 +4,7 @@ import AddToCart from "./AddToCart";
 import AddToWishlist from "./AddToWishlist";
 import { getAllWishlistItems } from "../utils/wishlist";
 import { toast } from "react-toastify";
+import { FaShoppingCart, FaRegHeart, FaSortAmountDownAlt, FaSortAmountUpAlt } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [items, setItems] = useState([]);
@@ -97,16 +98,16 @@ const Dashboard = () => {
         <p>Here you can find all the information about the selected product.</p>
         <div className="flex justify-center space-x-4 mt-4">
           <button
-            className={`btn ${showCart ? "btn-primary" : "btn-secondary"}`}
+            className={`btn ${showCart ? "btn-secondary" : ""}`}
             onClick={() => setShowCart(true)}
           >
-            Cart
+            Cart <FaShoppingCart></FaShoppingCart>
           </button>
           <button
-            className={`btn ${showCart ? "btn-secondary" : "btn-primary"}`}
+            className={`btn ${showCart ? "" : "btn-secondary"}`}
             onClick={() => setShowCart(false)}
           >
-            Wishlist
+            Wishlist <FaRegHeart></FaRegHeart>
           </button>
         </div>
       </header>
@@ -118,9 +119,19 @@ const Dashboard = () => {
         {showCart && (
           <div className="flex justify-center items-center gap-8">
             <h1>Total Cost: ${totalPrice}</h1>
-            <button className="btn btn-warning" onClick={handleSort}>
-              Sort By Price {sortOrder === "asc" ? "🔼" : "🔽"}
-            </button>
+            <button className="btn btn-warning flex items-center space-x-2" onClick={handleSort}>
+      {sortOrder === "asc" ? (
+        <>
+          
+          <span>Sort By Price</span><FaSortAmountUpAlt />
+        </>
+      ) : (
+        <>
+          
+          <span>Sort By Price</span> <FaSortAmountDownAlt />
+        </>
+      )}
+    </button>
             <button className="btn btn-success" onClick={handlePurchase}>
               Purchase
             </button>

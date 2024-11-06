@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
 import { addToCart } from "../utils";
 import { addToWishlist } from "../utils/wishlist";
+import { FaRegHeart, FaShoppingCart } from "react-icons/fa";
 
 const CardDetails = () => {
   const { product_id } = useParams();
@@ -58,20 +59,23 @@ const CardDetails = () => {
               onClick={() => handleAddToCart(item)}
               className="btn btn-primary"
             >
-              Add to Cart
+              Add to Cart <FaShoppingCart></FaShoppingCart>
             </button>
             <button
               onClick={() => handleAddToWishlist(item)}
               className="btn btn-secondary ml-2"
             >
-              ❤️ Wishlist
+              <FaRegHeart></FaRegHeart> Wishlist
             </button>
           </div>
         </div>
       </div>
-      <div className="flex justify-center mb-12">
+      <div className="flex justify-center mb-12 gap-3">
         <button className="btn btn-outline" onClick={() => navigate("/")}>
           Back to Home
+        </button>
+        <button className="btn btn-outline " onClick={() => navigate("/dashboard")}>
+          Go to Cart <FaShoppingCart></FaShoppingCart>
         </button>
       </div>
     </div>
