@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import bannerImage from "../assets/banner.jpg";
+
 const Banner = () => {
   return (
     <div>
@@ -14,16 +15,16 @@ const Banner = () => {
         </p>
 
         <Link to="/dashboard">
-          <button className="btn btn-primary mb-4">Shop Now</button>
+          <button className="btn btn-primary mb-4 sm:mb-0">Shop Now</button>
         </Link>
       </div>
 
-      <div className="flex justify-center mb-4 -mt-32 ">
-        <div className="border-8 rounded-lg ">
+      <div className="flex justify-center mb-4 -mt-32">
+        <div className="border-8 rounded-lg">
           <img
             src={bannerImage}
             alt="Tech Accessories"
-            className="w-[1000px] h-[400px] object-cover rounded-lg "
+            className="w-[1000px] h-[400px] object-cover rounded-lg hidden sm:block"
           />
         </div>
       </div>

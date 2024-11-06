@@ -5,8 +5,8 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <div >
-      <div className=" navbar backdrop-blur-xl bg-white/30 px-10 z-50 fixed">
+    <div>
+      <div className="navbar backdrop-blur-xl bg-white/30 px-10 z-50 fixed">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -40,9 +40,7 @@ const Navbar = () => {
               <li>
                 <NavLink
                   to="/dashboard"
-                  className={
-                    location.pathname === "/dashboard" ? "font-bold" : ""
-                  }
+                  className={location.pathname === "/dashboard" ? "font-bold" : ""}
                 >
                   Dashboard
                 </NavLink>
@@ -50,9 +48,7 @@ const Navbar = () => {
               <li>
                 <NavLink
                   to="/statistics"
-                  className={
-                    location.pathname === "/statistics" ? "font-bold" : ""
-                  }
+                  className={location.pathname === "/statistics" ? "font-bold" : ""}
                 >
                   Statistics
                 </NavLink>
@@ -60,9 +56,7 @@ const Navbar = () => {
               <li>
                 <NavLink
                   to="/all-products"
-                  className={
-                    location.pathname === "/all-products" ? "font-bold" : ""
-                  }
+                  className={location.pathname === "/all-products" ? "font-bold" : ""}
                 >
                   All Products
                 </NavLink>
@@ -87,9 +81,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="/dashboard"
-                className={
-                  location.pathname === "/dashboard" ? "font-bold" : ""
-                }
+                className={location.pathname === "/dashboard" ? "font-bold" : ""}
               >
                 Dashboard
               </NavLink>
@@ -97,9 +89,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="/statistics"
-                className={
-                  location.pathname === "/statistics" ? "font-bold" : ""
-                }
+                className={location.pathname === "/statistics" ? "font-bold" : ""}
               >
                 Statistics
               </NavLink>
@@ -107,9 +97,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="/all-products"
-                className={
-                  location.pathname === "/all-products" ? "font-bold" : ""
-                }
+                className={location.pathname === "/all-products" ? "font-bold" : ""}
               >
                 All Products
               </NavLink>
@@ -118,13 +106,13 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end gap-3">
-          <Link to="/dashboard" className="relative w-10 h-10">
+          <Link to="/dashboard" className="relative w-10 h-10 hidden lg:block">
             <img
               src="https://img.icons8.com/?size=100&id=87&format=png&color=000000"
               alt="Wishlist"
             />
           </Link>
-          <Link to="/dashboard" className="relative w-10 h-10">
+          <Link to="/dashboard" className="relative w-10 h-10 hidden lg:block">
             <img
               src="https://img.icons8.com/?size=100&id=42382&format=png&color=000000"
               alt="Cart"

@@ -2,20 +2,20 @@ import { NavLink } from "react-router-dom";
 
 const Items = ({ items }) => {
   return (
-    <div className=" ">
+    <div>
       <div
         role="tablist"
-        className="tabs tabs-boxed  gap-8 bg-gray-200 font-bold"
+        className="tabs tabs-boxed gap-8 bg-gray-200 font-bold overflow-x-auto sm:flex-col sm:overflow-x-hidden sm:overflow-y-hidden sm:w-full sm:px-2"
       >
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `tab rounded-lg transition w-full  capitalize ${
-              isActive ? "tab-active " : ""
+            `tab rounded-lg transition w-full capitalize ${
+              isActive ? "tab-active" : ""
             }`
           }
         >
-          All Products
+          All
         </NavLink>
 
         {items.map((item) => (
@@ -24,7 +24,9 @@ const Items = ({ items }) => {
             role="tab"
             to={`/categories/${item.category}`}
             className={({ isActive }) =>
-              `tab capitalize ${isActive ? "tab-active " : " "}`
+              `tab capitalize ${
+                isActive ? "tab-active" : " "
+              }`
             }
           >
             {item.category}
