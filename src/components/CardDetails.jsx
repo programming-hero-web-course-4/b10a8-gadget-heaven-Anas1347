@@ -45,6 +45,9 @@ const CardDetails = () => {
             <strong>Price:</strong> ${item.price}
           </p>
           <p>
+          <button className="bg-green-200 rounded-full p-2 ">In Stock</button>
+          </p>
+          <p>
             <strong>Description:</strong> {item.description}
           </p>
           <p>

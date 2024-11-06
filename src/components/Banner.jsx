@@ -5,7 +5,7 @@ const Banner = () => {
   return (
     <div>
       <div className="flex flex-col items-center text-white bg-purple-400 p-4 h-[400px]">
-        <h1 className="text-4xl font-bold mb-2">
+        <h1 className="text-4xl font-bold mt-10">
           Upgrade Your Tech Accessories
         </h1>
         <h2 className="text-2xl mb-4">Gadget Heaven Accessories</h2>
@@ -15,7 +15,7 @@ const Banner = () => {
         </p>
 
         <Link to="/dashboard">
-          <button className="btn btn-primary mb-4 sm:mb-0">Shop Now</button>
+          <button className="btn hidden sm:block btn-primary mb-4 sm:mb-0">Shop Now</button>
         </Link>
       </div>
 

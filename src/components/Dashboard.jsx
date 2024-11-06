@@ -4,7 +4,12 @@ import AddToCart from "./AddToCart";
 import AddToWishlist from "./AddToWishlist";
 import { getAllWishlistItems } from "../utils/wishlist";
 import { toast } from "react-toastify";
-import { FaShoppingCart, FaRegHeart, FaSortAmountDownAlt, FaSortAmountUpAlt } from 'react-icons/fa';
+import {
+  FaShoppingCart,
+  FaRegHeart,
+  FaSortAmountDownAlt,
+  FaSortAmountUpAlt,
+} from "react-icons/fa";
 
 const Dashboard = () => {
   const [items, setItems] = useState([]);
@@ -119,19 +124,21 @@ const Dashboard = () => {
         {showCart && (
           <div className="flex justify-center items-center gap-8">
             <h1>Total Cost: ${totalPrice}</h1>
-            <button className="btn btn-warning flex items-center space-x-2" onClick={handleSort}>
-      {sortOrder === "asc" ? (
-        <>
-          
-          <span>Sort By Price</span><FaSortAmountUpAlt />
-        </>
-      ) : (
-        <>
-          
-          <span>Sort By Price</span> <FaSortAmountDownAlt />
-        </>
-      )}
-    </button>
+            <button
+              className="btn btn-warning flex items-center space-x-2"
+              onClick={handleSort}
+            >
+              {sortOrder === "asc" ? (
+                <>
+                  <span>Sort By Price</span>
+                  <FaSortAmountUpAlt />
+                </>
+              ) : (
+                <>
+                  <span>Sort By Price</span> <FaSortAmountDownAlt />
+                </>
+              )}
+            </button>
             <button className="btn btn-success" onClick={handlePurchase}>
               Purchase
             </button>
@@ -173,13 +180,21 @@ const Dashboard = () => {
           role="dialog"
           aria-modal="true"
         >
-          <div className="bg-white p-5 rounded-md shadow-md">
-            <h2 id="modal-title" className="text-lg font-semibold">
+          <div className="bg-white p-5 rounded-md shadow-md max-w-md w-full sm:w-11/12 md:w-3/4 lg:w-1/2 mx-auto">
+            <img
+              src="https://i.ibb.co.com/X441rX5/success-7518748.png"
+              alt="Purchase Success"
+              className="w-full max-w-[150px] mx-auto mb-4 object-contain"
+            />
+            <h2 id="modal-title" className="text-lg font-semibold text-center">
               Purchase Successful!
             </h2>
-            <p>Thank you for your purchase!</p>
-            <h1>Total Cost: ${purchasePrice}</h1>{" "}
-            <button className="btn btn-primary mt-4" onClick={closeModal}>
+            <p className="text-center">Thank you for your purchase!</p>
+            <h1 className="text-center">Total Cost: ${purchasePrice}</h1>
+            <button
+              className="btn btn-primary mt-4 w-full"
+              onClick={closeModal}
+            >
               Close
             </button>
           </div>
